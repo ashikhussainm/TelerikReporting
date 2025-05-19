@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup Label="Globals">
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
+	<ItemGroup>
+		
+		<PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+		
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
+		
+		
+		<PackageReference Include="Telerik.Reporting.OpenXmlRendering.Trial" Version="19.0.25.313" />
+		<PackageReference Include="Telerik.Reporting.Services.AspNetCore.Trial" Version="19.0.25.313" />
+		<PackageReference Include="Telerik.Reporting.WebServiceDataSource.Trial" Version="19.0.25.313" />
+		
+	</ItemGroup>
+</Project>
