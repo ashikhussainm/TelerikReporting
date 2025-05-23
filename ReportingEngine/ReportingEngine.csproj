@@ -8,10 +8,31 @@
 		
 		<PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
 		
-		
 		<PackageReference Include="Telerik.Reporting.OpenXmlRendering.Trial" Version="19.0.25.313" />
+		
 		<PackageReference Include="Telerik.Reporting.Services.AspNetCore.Trial" Version="19.0.25.313" />
+		
 		<PackageReference Include="Telerik.Reporting.WebServiceDataSource.Trial" Version="19.0.25.313" />
 		
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="LocalNugetPackages\Telerik.Reporting.OpenXmlRendering.Trial.19.0.25.313.nupkg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="LocalNugetPackages\Telerik.Reporting.Services.AspNetCore.Trial.19.0.25.313.nupkg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="LocalNugetPackages\Telerik.Reporting.WebServiceDataSource.Trial.19.0.25.313.nupkg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="NugetPackages\Telerik.Reporting.OpenXmlRendering.19.1.25.521.nupkg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="NugetPackages\Telerik.Reporting.Services.AspNetCore.19.1.25.521.nupkg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="NugetPackages\Telerik.Reporting.WebServiceDataSource.19.1.25.521.nupkg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>
