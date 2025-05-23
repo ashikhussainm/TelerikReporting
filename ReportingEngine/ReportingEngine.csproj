@@ -16,6 +16,8 @@
 		
 		<PackageReference Include="Telerik.Reporting.Services.AspNetCore.Trial" Version="19.0.25.313" />
 		
+		<PackageReference Include="Telerik.Reporting.Trial" Version="19.0.25.313" />
+		
 		<PackageReference Include="Telerik.Reporting.WebServiceDataSource.Trial" Version="19.0.25.313" />
 		
 	</ItemGroup>
@@ -24,6 +26,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="LocalNugetPackages\Telerik.Reporting.Services.AspNetCore.Trial.19.0.25.313.nupkg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="LocalNugetPackages\Telerik.Reporting.Trial.19.0.25.313.nupkg">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="LocalNugetPackages\Telerik.Reporting.WebServiceDataSource.Trial.19.0.25.313.nupkg">
