@@ -42,7 +42,7 @@ namespace TelerikReportEngine.Controllers
             {
                 request.ReportExportType = "PDF";
             }
-            string reportPath = Path.Combine(_webHostEnvironment.ContentRootPath, "Reports", request.ReportName);
+            string reportPath = Path.Combine("Reports", request.ReportName);
 
             if (!System.IO.File.Exists(reportPath))
             {

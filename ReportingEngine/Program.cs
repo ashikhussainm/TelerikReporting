@@ -39,6 +39,11 @@ builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp =>
             .AddFallbackResolver(new UriReportSourceResolver(reportsPath))
     });
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(8080); // Listen on port 8080 for all IP addresses inside the container
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
