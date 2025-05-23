@@ -14,6 +14,12 @@ WORKDIR /src
 COPY ["NuGet.Config", "."]
 COPY ["LocalNugetPackages", "LocalNugetPackages"]
 
+# List contents of LocalNugetPackages for debugging
+RUN ls -al LocalNugetPackages
+
+# Display the contents of NuGet.Config for debugging
+RUN nl NuGet.Config
+
 COPY ["ReportingEngine.csproj", "."]
 RUN dotnet restore "./ReportingEngine.csproj" --configfile NuGet.Config
 
