@@ -12,6 +12,8 @@
 		
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
 		
+		<PackageReference Include="Telerik.Drawing.Skia.Trial" Version="19.0.25.313" />
+		
 		<PackageReference Include="Telerik.Reporting.OpenXmlRendering.Trial" Version="19.0.25.313" />
 		
 		<PackageReference Include="Telerik.Reporting.Services.AspNetCore.Trial" Version="19.0.25.313" />
