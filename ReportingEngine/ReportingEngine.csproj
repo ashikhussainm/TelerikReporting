@@ -43,5 +43,8 @@
 	  <None Update="NugetPackages\Telerik.Reporting.WebServiceDataSource.19.1.25.521.nupkg">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Reports\REInvoice.trdx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>
