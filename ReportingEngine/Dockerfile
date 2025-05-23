@@ -5,6 +5,12 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 8080
 
+# Install font-related dependencies for Linux (Telerik Reporting)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libfreetype6 \
+    libfontconfig1 \
+    && rm -rf /var/lib/apt/lists/*
+
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
