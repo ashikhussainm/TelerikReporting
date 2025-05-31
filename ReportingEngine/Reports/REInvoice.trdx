@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report DataSourceName="invoiceDataSource" Width="19.323cm" Name="MneInvoiceDataSource" ShowSnapGrid="True" xmlns="http://schemas.telerik.com/reporting/2025/1.0">
+<Report DataSourceName="invoiceDataSource" Width="20.2cm" Name="MneInvoiceDataSource" ShowSnapGrid="True" xmlns="http://schemas.telerik.com/reporting/2025/1.0">
   <DataSources>
     <ObjectDataSource ParameterValues="{}" DataMember="GetReportData" Name="invoiceDataSource">
       <DataSource>
@@ -274,7 +274,7 @@
                   </TableCell>
                   <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
                     <ReportItem>
-                      <TextBox Width="2.894cm" Height="0.619cm" Left="9.4cm" Top="1cm" Value="=Fields.ExcursionDate" Format="{0:MM/dd/yyyy}" Name="textBox21" StyleName="BlueOpal.TableBody">
+                      <TextBox Width="2.894cm" Height="0.619cm" Left="9.4cm" Top="1cm" Value="=Fields.ExcursionDate" Format="{0:dddd, MMMM dd yyyy}" Name="textBox21" StyleName="BlueOpal.TableBody">
                         <Style TextAlign="Center" VerticalAlign="Middle">
                           <Font Name="Microsoft Sans Serif" />
                           <BorderColor Default="Gray" />
@@ -396,7 +396,7 @@
         </GroupHeaderSection>
       </GroupHeader>
       <GroupFooter>
-        <GroupFooterSection Height="8.168cm" Name="groupFooterSection1">
+        <GroupFooterSection Height="9.568cm" Name="groupFooterSection1">
           <Items>
             <TextBox Width="3.5cm" Height="0.5cm" Left="11.6cm" Top="0.1cm" Value=" Billing Amount:" Name="textBox30">
               <Style TextAlign="Right">
@@ -452,19 +452,19 @@
                 <Font Name="Microsoft Sans Serif" Size="9pt" />
               </Style>
             </TextBox>
-            <TextBox Width="18.3cm" Height="1cm" Left="0.1cm" Top="5.968cm" Value="This statement is sample document and has no validity even with any seal and signature.&#xA;&#xA;As per Article 13(6) of the Value Added Tax Act, the amount specified herein is exempt from taxation." Name="textBox37">
+            <TextBox Width="18.3cm" Height="1.4cm" Left="0.1cm" Top="6.968cm" Value="This statement is sample document and has no validity even with any seal and signature.&#xA;&#xA;As per Article 13(6) of the Value Added Tax Act, the amount specified herein is exempt from taxation." Name="textBox37">
               <Style>
                 <Font Name="Microsoft Sans Serif" Size="9pt" Bold="False" />
               </Style>
             </TextBox>
-            <TextBox Width="4.631cm" Height="0.5cm" Left="0.1cm" Top="7.168cm" Value="This Invoice was generated on" Name="textBox40">
-              <Style Color="0, 32, 96">
-                <Font Name="Microsoft Sans Serif" Size="9pt" Bold="True" Italic="True" />
+            <TextBox Width="7.1cm" Height="0.5cm" Left="0.1cm" Top="8.568cm" Value="This Invoice was generated on" Name="textBox40">
+              <Style Color="96, 74, 123">
+                <Font Name="Microsoft Sans Serif" Size="9pt" Bold="False" Italic="True" />
               </Style>
             </TextBox>
-            <TextBox Width="4.631cm" Height="0.5cm" Left="4.53cm" Top="7.168cm" Value="=Fields.FooterDate" Name="textBox43">
-              <Style Color="0, 32, 96">
-                <Font Name="Microsoft Sans Serif" Size="9pt" Bold="True" Italic="True" />
+            <TextBox Width="13.8cm" Height="0.5cm" Left="4.5cm" Top="8.568cm" Value="=Fields.FooterDate" Name="textBox43">
+              <Style Color="96, 74, 123">
+                <Font Name="Microsoft Sans Serif" Size="9pt" Bold="False" Italic="True" />
               </Style>
             </TextBox>
           </Items>
