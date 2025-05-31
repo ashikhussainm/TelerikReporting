@@ -14,6 +14,19 @@
         </ObjectDataSourceParameter>
       </Parameters>
     </ObjectDataSource>
+	  <ObjectDataSource ParameterValues="{}" DataMember="GetInvoiceItemList" Name="invoiceItemSource">
+		  <DataSource>
+			  <String>ReportingEngine.Services.InvoiceService, ReportingEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</String>
+		  </DataSource>
+		  <Parameters>
+			  <ObjectDataSourceParameter Name="invoiceNumber">
+				  <DataType>System.String</DataType>
+				  <Value>
+					  <String>=Parameters.InvoiceNumber.Value</String>
+				  </Value>
+			  </ObjectDataSourceParameter>
+		  </Parameters>
+	  </ObjectDataSource>
   </DataSources>
   <Items>
     <PageHeaderSection Height="3.2cm" Name="pageHeaderSection1">
@@ -214,7 +227,7 @@
                 </TextBox>
               </Items>
             </Panel>
-            <Table DataSourceName="invoiceDataSource" Width="18.3cm" Height="1.661cm" Left="0.3cm" Top="4.6cm" Name="table1" StyleName="BlueOpal.TableNormal">
+            <Table DataSourceName="invoiceItemSource" Width="18.3cm" Height="1.661cm" Left="0.3cm" Top="4.6cm" Name="table1" StyleName="BlueOpal.TableNormal">
               <Body>
                 <Cells>
                   <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
@@ -274,7 +287,7 @@
                   </TableCell>
                   <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
                     <ReportItem>
-                      <TextBox Width="2.894cm" Height="0.619cm" Left="9.4cm" Top="1cm" Value="=Fields.ExcursionDate" Format="{0:dddd, MMMM dd yyyy}" Name="textBox21" StyleName="BlueOpal.TableBody">
+                      <TextBox Width="2.894cm" Height="0.619cm" Left="9.4cm" Top="1cm" Value="=Fields.ExcursionDate" Format="{0:MM/dd/yyyy}" Name="textBox21" StyleName="BlueOpal.TableBody">
                         <Style TextAlign="Center" VerticalAlign="Middle">
                           <Font Name="Microsoft Sans Serif" />
                           <BorderColor Default="Gray" />
