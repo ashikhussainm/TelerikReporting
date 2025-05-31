@@ -102,31 +102,43 @@ namespace TelerikReportEngine.Controllers
             return File(result.DocumentBytes, contentType, $"Invoice-{usDateTimeFileName}.{fileExtension}");
         }
 
-        [HttpGet("SupportedExportFormats")]
+        [HttpGet("GetSupportedExportFormats")]
         public IActionResult GetSupportedExportFormats()
         {
-            // Determine if RTF is supported (only on Windows)
-            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            // Determine the runtime platform
+            string platform =
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Windows" :
+                RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "Linux" :
+                RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "OSX" :
+                "Unknown";
+
+            bool isWindows = platform == "Windows";
 
             var supportedFormats = new List<object>
-    {
-        new { Name = "PDF",   Description = "Portable Document Format", Extension = "pdf" },
-        new { Name = "XLS",   Description = "Excel 97-2003 (legacy)", Extension = "xls" },
-        new { Name = "XLSX",  Description = "Excel Open XML (modern Excel)", Extension = "xlsx" },
-        new { Name = "DOCX",  Description = "Microsoft Word Open XML Format", Extension = "docx" },
-        new { Name = "PPTX",  Description = "PowerPoint Presentation Format", Extension = "pptx" },
-        new { Name = "CSV",   Description = "Comma Separated Values", Extension = "csv" },
-        new { Name = "TXT",   Description = "Plain Text (tab-delimited by default)", Extension = "txt" },
-        new { Name = "HTML5", Description = "HTML with CSS styling", Extension = "html" },
-        new { Name = "IMAGE", Description = "Multi-page TIFF (default), or other image", Extension = "tiff" }
-    };
+            {
+                new { Name = "PDF",   Description = "Portable Document Format", Extension = "pdf" },
+                new { Name = "XLS",   Description = "Excel 97-2003 (legacy)", Extension = "xls" },
+                new { Name = "XLSX",  Description = "Excel Open XML (modern Excel)", Extension = "xlsx" },
+                new { Name = "DOCX",  Description = "Microsoft Word Open XML Format", Extension = "docx" },
+                new { Name = "PPTX",  Description = "PowerPoint Presentation Format", Extension = "pptx" },
+                new { Name = "CSV",   Description = "Comma Separated Values", Extension = "csv" },
+                new { Name = "TXT",   Description = "Plain Text (tab-delimited by default)", Extension = "txt" },
+                new { Name = "HTML5", Description = "HTML with CSS styling", Extension = "html" },
+                new { Name = "IMAGE", Description = "Multi-page TIFF (default), or other image", Extension = "tiff" }
+            };
 
             if (isWindows)
             {
                 supportedFormats.Insert(4, new { Name = "RTF", Description = "Rich Text Format", Extension = "rtf" });
             }
 
-            return Ok(supportedFormats);
+            var response = new
+            {
+                Platform = platform,
+                SupportedFormats = supportedFormats
+            };
+
+            return Ok(response);
         }
     }
 }
