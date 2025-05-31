@@ -1,7 +1,9 @@
 ﻿# ReportingEngine (.NET 6) with Telerik Reporting & Kendo UI Dashboard
 
 **Author**: Ashik M Hussain
+
 **Designation**: Technical Solutions Architect
+
 **Medium Profile**: [@ashikmhussain.a](https://medium.com/@ashikmhussain.a)
 
 ---
