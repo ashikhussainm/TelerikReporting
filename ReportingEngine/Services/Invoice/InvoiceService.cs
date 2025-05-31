@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Globalization;
 
 namespace ReportingEngine.Services
 {
@@ -26,6 +27,7 @@ namespace ReportingEngine.Services
         public decimal BillingFee { get; set; }
         public decimal BillingAmount { get; set; }
         public decimal BillingTotal { get; set; }
+        public string FooterDate { get; set; } 
     }
 
     [DataObject]
@@ -35,7 +37,6 @@ namespace ReportingEngine.Services
         {
         }
 
-
         /// <summary>
         /// Returns report data for the given invoiceNumber.
         /// Tagged so Telerik Reporting can discover it as a data method.
@@ -44,16 +45,20 @@ namespace ReportingEngine.Services
         [DataObjectMethod(DataObjectMethodType.Select)]
         public IList<InvoiceModel> GetReportData(string invoiceNumber)
         {
+            // Get current date and due date
+            var today = DateTime.Today;
+            var dueDate = today.AddDays(15);
+            var footerDate = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt", CultureInfo.GetCultureInfo("en-US"));
 
-            // Hard-coded sample data matching the report fields
+            // Hard-coded sample data matching the report fields, but with dynamic dates
             var allData = new List<InvoiceModel>
             {
                 new InvoiceModel
                 {
                     InvoiceNumber   = "INV001",
-                    Date            = new DateTime(2025,5,16),
-                    DueDate         = new DateTime(2025,5,31),
-                    ExcursionDate   = new DateTime(2025,6,1),
+                    Date            = today,
+                    DueDate         = dueDate,
+                    ExcursionDate   = today,
                     CustomerNumber  = "CUST001",
                     CustomerName    = "ACME Corp",
                     CustomerAddress = "123 Main St, Springfield",
@@ -64,14 +69,15 @@ namespace ReportingEngine.Services
                     Voucher         = "VCH100",
                     BillingFee      = 5.00m,
                     BillingAmount   = 305.00m,
-                    BillingTotal    = 310.00m
+                    BillingTotal    = 310.00m,
+                    FooterDate      = footerDate
                 },
                 new InvoiceModel
                 {
                     InvoiceNumber   = "INV002",
-                    Date            = new DateTime(2025,5,17),
-                    DueDate         = new DateTime(2025,6,1),
-                    ExcursionDate   = new DateTime(2025,6,5),
+                    Date            = today,
+                    DueDate         = dueDate,
+                    ExcursionDate   = today,
                     CustomerNumber  = "CUST002",
                     CustomerName    = "Globex Inc",
                     CustomerAddress = "456 Elm St, Shelbyville",
@@ -82,7 +88,8 @@ namespace ReportingEngine.Services
                     Voucher         = "VCH200",
                     BillingFee      = 7.50m,
                     BillingAmount   = 487.50m,
-                    BillingTotal    = 495.00m
+                    BillingTotal    = 495.00m,
+                    FooterDate      = footerDate
                 }
             };
 
