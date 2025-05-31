@@ -462,7 +462,7 @@
                 <Font Name="Microsoft Sans Serif" Size="9pt" Bold="False" Italic="True" />
               </Style>
             </TextBox>
-            <TextBox Width="13.8cm" Height="0.5cm" Left="4.5cm" Top="8.568cm" Value="=Fields.FooterDate" Name="textBox43">
+            <TextBox Width="13.8cm" Height="0.5cm" Left="5cm" Top="8.568cm" Value="=Fields.FooterDate" Name="textBox43">
               <Style Color="96, 74, 123">
                 <Font Name="Microsoft Sans Serif" Size="9pt" Bold="False" Italic="True" />
               </Style>
