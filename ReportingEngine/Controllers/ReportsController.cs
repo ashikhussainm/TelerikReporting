@@ -56,7 +56,15 @@ namespace TelerikReportEngine.Controllers
                 return BadRequest("Report name and invoice number are required.");
             }
 
-            var exportType = string.IsNullOrEmpty(request.ReportExportType) ? "PDF" : request.ReportExportType.ToUpperInvariant();
+            // 1. Determine requested type and whether to wrap
+            var requestedType = string.IsNullOrEmpty(request.ReportExportType)
+                ? "PDF"
+                : request.ReportExportType.Trim().ToUpperInvariant();
+
+            bool wrapPdfInHtml = requestedType == "HTML" || requestedType == "HTML5";
+
+            // 2. Always render PDF if wrapping, otherwise render the requested format
+            var exportType = wrapPdfInHtml ? "PDF" : requestedType;
 
             string reportPath = Path.Combine("Reports", request.ReportName);
 
@@ -78,6 +86,25 @@ namespace TelerikReportEngine.Controllers
 
             var processor = new ReportProcessor(_configuration);
             var result = processor.RenderReport(exportType, reportSource, deviceInfo);
+
+            // For HTML/HTML5, wrap the PDF bytes in an iframe page
+            if (wrapPdfInHtml)
+            {
+                var htmlPage = GeneratePdfIframePage(result.DocumentBytes, $"Invoice {request.InvoiceNumber}");
+                // Convert to UTF‐8 bytes
+                var htmlBytes = System.Text.Encoding.UTF8.GetBytes(htmlPage);
+
+                // Create a timestamped filename
+                var timestamp = DateTime.Now.ToString("MM-dd-yyyy_hh-mm-ss");
+                var fileName = $"Invoice-{timestamp}.html";
+
+                // Return as downloadable HTML file
+                return File(
+                    htmlBytes,
+                    "text/html",
+                    fileName
+                );
+            }
 
             var contentType = ExportFormatContentTypes.TryGetValue(exportType, out var type)
                 ? type
@@ -101,6 +128,64 @@ namespace TelerikReportEngine.Controllers
             string usDateTimeFileName = now.ToString("MM-dd-yyyy_hh-mm-ss");
             return File(result.DocumentBytes, contentType, $"Invoice-{usDateTimeFileName}.{fileExtension}");
         }
+        /// <summary>
+        ///  Generates a simple HTML page that embeds the PDF in an iframe.
+        /// </summary>
+        /// <param name="pdfBytes"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+            private string GeneratePdfIframePage(byte[] pdfBytes, string title)
+            {
+                // 1) Convert PDF bytes to Base64
+                string base64Pdf = Convert.ToBase64String(pdfBytes);
+
+                // 2) HTML‐encode title for safety
+                string safeTitle = WebUtility.HtmlEncode(title);
+
+                // 3) Build the HTML with JS blob logic
+                return $@"<!DOCTYPE html>
+    <html lang=""en"">
+    <head>
+      <meta charset=""utf-8"" />
+      <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+      <title>PDF Viewer – {safeTitle}</title>
+      <style>
+        html, body {{
+          margin: 0; padding: 0;
+          width: 100%; height: 100%;
+        }}
+        #pdf-viewer {{
+          width: 100%; height: 100%;
+          border: none;
+        }}
+      </style>
+    </head>
+    <body>
+      <!-- Placeholder iframe; src set by JS -->
+      <iframe id=""pdf-viewer"" title=""{safeTitle}""></iframe>
+
+      <script>
+        // Base64 PDF string
+        const b64 = ""{base64Pdf}"";
+
+        // Decode Base64 to binary
+        const binary = atob(b64);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {{
+          bytes[i] = binary.charCodeAt(i);
+        }}
+
+        // Create a Blob and object URL
+        const blob = new Blob([bytes], {{ type: 'application/pdf' }});
+        const url  = URL.createObjectURL(blob);
+
+        // Point the iframe at the blob URL
+        document.getElementById('pdf-viewer').src = url;
+      </script>
+    </body>
+    </html>";
+            }
 
         [HttpGet("GetSupportedExportFormats")]
         public IActionResult GetSupportedExportFormats()
