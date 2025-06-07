@@ -6,10 +6,17 @@ WORKDIR /app
 EXPOSE 8080
 
 # Install font-related dependencies for Linux (Telerik Reporting)
+# Install tzdata and set timezone to America/Chicago
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6 \
     libfontconfig1 \
+    tzdata \
+    && ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime \
+    && echo "America/Chicago" > /etc/timezone \
+    && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/*
+
+ENV TZ=America/Chicago
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
